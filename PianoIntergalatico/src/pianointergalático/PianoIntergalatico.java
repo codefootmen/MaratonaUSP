@@ -71,13 +71,29 @@ public class PianoIntergalatico {
 
         int notaMaisRepetida = 0;
         int maiorNumero = 0;
-        
+
         for (int i = 0; i < frequencia.length; i++) {
             if (frequencia[i][1] > maiorNumero) {
                 maiorNumero = frequencia[i][1];
                 notaMaisRepetida = frequencia[i][0];
             }
         }
+
+        if (maiorNumero > 1) {
+            int repeticoes = 0;
+            for (int i = 0; i < frequencia.length; i++) {
+                if (frequencia[i][1] == maiorNumero) {
+                    repeticoes++;
+                }
+            }
+
+            if (repeticoes > 1) {
+                notaMaisRepetida = buscarMaior(a, b);
+            }
+        } else if (maiorNumero == 1) {
+            notaMaisRepetida = buscarMaior(a, b);
+        }
+
         System.out.println("Nota mais repetida = " + notaMaisRepetida);
         atualizaIntervalo(a, b, notaMaisRepetida);
 
@@ -93,5 +109,15 @@ public class PianoIntergalatico {
         for (int i = 0; i < notas.length; i++) {
             System.out.println(notas[i]);
         }
+    }
+
+    public static int buscarMaior(int a, int b) {
+        int maior = 0;
+        for (int i = a; i <= b; i++) {
+            if (notas[i] > maior) {
+                maior = notas[i];
+            }
+        }
+        return maior;
     }
 }
